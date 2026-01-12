@@ -1,8 +1,9 @@
 {
   "routes": {
     "search": {
-      "path": "/search",
-      "public": true
+      "path": "/_v/search",
+      "public": true,
+      "method": "POST"
     }
   }
 }
