@@ -1,8 +1,14 @@
-import { ExternalClient, IOContext, InstanceOptions } from '@vtex/api'
+import { JanusClient, IOContext, InstanceOptions } from '@vtex/api'
 
-export class CatalogClient extends ExternalClient {
+export class CatalogClient extends JanusClient {
   constructor(ctx: IOContext, options?: InstanceOptions) {
-    super('', ctx, options)
+    super(ctx, {
+      ...options,
+      headers: {
+        ...options?.headers,
+        VtexIdclientAutCookie: ctx.authToken,
+      },
+    })
   }
 
   public getCollections(page: number) {

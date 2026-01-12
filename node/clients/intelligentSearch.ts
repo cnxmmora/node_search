@@ -1,23 +1,43 @@
-import { IOContext, InstanceOptions, ExternalClient } from '@vtex/api'
+import { IOContext, InstanceOptions, JanusClient } from '@vtex/api'
 import type { SearchResponse } from '../typings/search'
 
-export class IntelligentSearchClient extends ExternalClient {
+export class IntelligentSearchClient extends JanusClient {
   constructor(context: IOContext, options?: InstanceOptions) {
-    super(
-      '/api/io/_v/api/intelligent-search', 
-      context,                            
-      options
+    super(context, {
+      ...options,
+      headers: {
+        ...options?.headers,
+      },
+    })
+  }
+
+  public searchByCollection(collectionId: number): Promise<SearchResponse> {
+    // El formato correcto según la documentación es usar facets
+    const facets = `productClusterIds/${collectionId}`
+    
+    return this.http.get<SearchResponse>(
+      `/product_search/${facets}`,
+      {
+        params: {
+          locale: 'es-CO', // opcional, ajusta según tu región
+        },
+        metric: 'intelligent-search-collection',
+      }
     )
   }
 
-
+  // Método alternativo si necesitas búsqueda sin colección
   public search(params: any): Promise<SearchResponse> {
-  return this.http.post<SearchResponse>(
-    '/product_search',
-    params,
-    {
-      metric: 'intelligent-search',
-    }
-  )
-}
+    const { fullText } = params
+    
+    return this.http.get<SearchResponse>(
+      `/product_search/${fullText}`,
+      {
+        params: {
+          locale: 'es-CO',
+        },
+        metric: 'intelligent-search',
+      }
+    )
+  }
 }

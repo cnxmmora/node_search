@@ -1,17 +1,18 @@
-import { ExternalClient, IOContext, InstanceOptions } from '@vtex/api'
+import { JanusClient, IOContext, InstanceOptions } from '@vtex/api'
 
-export class SearchGraphqlClient extends ExternalClient {
+export class SearchGraphqlClient extends JanusClient {
   constructor(context: IOContext, options?: InstanceOptions) {
-    super(
-      '/_v/graphql', // ✅ endpoint graphql interno
-      context,
-      options
-    )
+    super(context, {
+      ...options,
+      headers: {
+        ...options?.headers,
+      },
+    })
   }
 
   public productSearch(variables: any) {
     return this.http.post(
-      '',
+      '/_v/graphql',
       {
         query: `
           query ProductSearch(
