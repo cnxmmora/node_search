@@ -7,7 +7,9 @@
   "mustUpdateAt": "2023-04-25",
   "categories": [],
   "dependencies": {
-    "vtex.search-graphql": "0.x"
+    "vtex.search-graphql": "0.x",
+    "vtex.store-graphql": "2.x",
+    "vtex.catalog-graphql": "2.x"
   },
   "builders": {
     "assets": "0.x",

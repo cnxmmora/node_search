@@ -1,13 +1,8 @@
 {
-  "memory": 256,
-  "timeout": 20,
-  "ttl": 10,
-  "workers": 1, 
   "routes": {
     "search": {
       "path": "/search",
-      "public": true,
-      "method": "POST"
+      "public": true
     }
   }
 }

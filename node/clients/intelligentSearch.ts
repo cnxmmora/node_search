@@ -4,8 +4,8 @@ import type { SearchResponse } from '../typings/search'
 export class IntelligentSearchClient extends ExternalClient {
   constructor(context: IOContext, options?: InstanceOptions) {
     super(
-      '/api/io/_v/api/intelligent-search', // ✅ baseURL PRIMERO
-      context,                             // ✅ context DESPUÉS
+      '/api/io/_v/api/intelligent-search', 
+      context,                            
       options
     )
   }
