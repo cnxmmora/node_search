@@ -69,8 +69,8 @@ export const intelligentSearch = async (args: any, ctx: Context) => {
     const firstPage = await ctx.clients.catalog.getCollections(1)
     const totalPages = firstPage?.paging?.pages || 1
 
-    // Obtener las últimas 3 páginas
-    const pagesToFetch = [totalPages, totalPages - 1, totalPages - 2].filter(
+    // Obtener las últimas 4 páginas
+    const pagesToFetch = [totalPages, totalPages - 1, totalPages - 2,totalPages - 3].filter(
       (page) => page > 0
     )
 
@@ -86,7 +86,7 @@ export const intelligentSearch = async (args: any, ctx: Context) => {
       return acc
     }, [])
 
-    console.log(`Found ${collections.length} collections`)
+    //console.log(collections,"holas_mis_colecciones" ,`Found ${collections.length} collections`)
 
     // 2. Encontrar la mejor colección que coincida con el término de búsqueda
     const match = findBestCollectionMatch(fullText, collections)
@@ -102,7 +102,7 @@ export const intelligentSearch = async (args: any, ctx: Context) => {
       match.id
     )
 
-    console.log('Products found:', productsData)
+    //console.log('Products found:', productsData)
 
     return productsData
   } catch (error) {

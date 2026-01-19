@@ -36,6 +36,15 @@ export class SearchGraphqlClient extends JanusClient {
                 productId
                 productName
               }
+              facets {
+              key
+              name
+              values {
+                  name
+                  quantity
+                  selected
+                }
+              }
             }
           }
         `,
